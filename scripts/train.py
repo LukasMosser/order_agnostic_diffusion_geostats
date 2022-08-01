@@ -97,7 +97,7 @@ if __name__ == "__main__":
                         help='mini-batch size')
     parser.add_argument('--weight-decay', default=1e-6, type=float,
                         help='weight decay')
-    parser.add_argument('--learning-rate', default=1e-6, type=float,
+    parser.add_argument('--learning-rate', default=3e-4, type=float,
                         help='weight decay')
     parser.add_argument('--max-grad-norm', default=1e2, type=float,
                         help='weight decay')
