@@ -1,11 +1,12 @@
 import gradio as gr
 import torch
 from diffusers.models import UNet2DModel
-from huggingface_hub import hf_hub_url, cached_download
+from huggingface_hub import hf_hub_download
+from oadg.sampling import sample, make_conditional_paths_and_realization
 
+image_size = 32
 
-config_file_url = hf_hub_url(repo_id="porestar/oadg_channels_64", filename="model.pt", revision="main")
-cached_download(config_file_url)
+path = hf_hub_download(repo_id="porestar/oadg_channels_64", filename="model.pt")
 
 model = UNet2DModel(
     sample_size=64,
@@ -27,18 +28,21 @@ model = UNet2DModel(
     ),
 )
 
-model.load_state_dict(torch.load("./oadg_channels_64/model.pt"))
+model.load_state_dict(torch.load(path, map_location=torch.device('cpu')))
 
 
-def classify_image(inp):
-    return {"lol": 0}
+def sample_image(img):
+    t_range_start, sigma_conditioned, realization = make_conditional_paths_and_realization(img, device='cpu')
+
+    img = sample(model, batch_size=16, image_size=image_size,
+                 realization=realization, t_range_start=t_range_start, sigma_conditioned=sigma_conditioned)
+    img = img.reshape(4 * image_size, 4 * image_size)
+    return img
 
 
-img = gr.Image(image_mode="L", source="canvas", shape=(32, 32), invert_colors=False)
-label = gr.Label(num_top_classes=3)
+img = gr.Image(image_mode="L", source="canvas", shape=(image_size, image_size), invert_colors=True)
+out = gr.Image(image_mode="L", shape=(image_size, image_size), invert_colors=True)
 
-demo = gr.Interface(
-    fn=classify_image, inputs=img, outputs=label, interpretation="default"
-)
+demo = gr.Interface(fn=sample_image, inputs=img, outputs=out)
 
 demo.launch()
