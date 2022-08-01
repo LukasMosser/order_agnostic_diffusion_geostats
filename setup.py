@@ -19,7 +19,7 @@ setup(
     author_email="lukas.mosser@gmail.com",
     url="https://github.com/LukasMosser/oadg",
     packages=['oadg'],
-    python_requires=">=3.8.0",
+    python_requires=">=3.7.0",
     install_requires=required,
     classifiers=[
         "Development Status :: 3 - Alpha",
