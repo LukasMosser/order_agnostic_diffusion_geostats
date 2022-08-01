@@ -4,7 +4,6 @@ from torch.distributions import OneHotCategorical
 from tqdm.auto import tqdm
 import numpy as np
 from pathlib import Path
-import os
 
 
 def sample_random_path(batch_size, w, h, device='cuda'):

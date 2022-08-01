@@ -19,7 +19,7 @@ setup(
     author_email="lukas.mosser@gmail.com",
     url="https://github.com/LukasMosser/oadg",
     packages=['oadg'],
-    python_requires=">=3.9.0",
+    python_requires=">=3.8.0",
     install_requires=required,
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -29,6 +29,7 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],

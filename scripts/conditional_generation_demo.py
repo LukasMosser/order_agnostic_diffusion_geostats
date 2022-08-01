@@ -1,5 +1,11 @@
 import gradio as gr
+import torch
 from diffusers.models import UNet2DModel
+from huggingface_hub import hf_hub_url, cached_download
+
+
+config_file_url = hf_hub_url(repo_id="porestar/oadg_channels_64", filename="model.pt", revision="main")
+cached_download(config_file_url)
 
 model = UNet2DModel(
     sample_size=64,
@@ -21,24 +27,10 @@ model = UNet2DModel(
     ),
 )
 
-pipeline = pipeline(task="image-classification", model="julien-c/hotdog-not-hotdog")
+model.load_state_dict(torch.load("./oadg_channels_64/model.pt"))
 
-def predict(image):
-  predictions = pipeline(image)
-  return {p["label"]: p["score"] for p in predictions}
-
-gr.Interface(
-    predict,
-    inputs=gr.inputs.Image(label="Upload hot dog candidate", type="filepath"),
-    outputs=gr.outputs.Label(num_top_classes=2),
-    title="Hot Dog? Or Not?",
-).launch()
 
 def classify_image(inp):
-    print(img.shape)
-    print(img.value)
-    plt.imshow(img)
-    plt.show()
     return {"lol": 0}
 
 
@@ -50,5 +42,3 @@ demo = gr.Interface(
 )
 
 demo.launch()
-
-#
