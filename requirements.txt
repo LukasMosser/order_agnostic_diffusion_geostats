@@ -1,0 +1,11 @@
+pytest
+numpy
+matplotlib
+imageio
+torch
+torchvision
+accelerate
+diffusers
+flake8
+pylint
+black
