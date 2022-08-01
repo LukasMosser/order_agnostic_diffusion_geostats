@@ -1,8 +1,10 @@
 import torch
 import torch.nn.functional as F
 from torch.distributions import OneHotCategorical
-from tqdm.notebook import tqdm
+from tqdm.auto import tqdm
 import numpy as np
+from pathlib import Path
+import os
 
 
 def sample_random_path(batch_size, w, h, device='cuda'):
@@ -115,7 +117,7 @@ def elbo_objective(model, realization, device='cuda'):
 
     idx = sample_random_index_for_sampling(batch_size, w, h, device=device)
 
-    random_path_mask = create_mask_at_random_path_index(sampled_random_path.view(-1, w, h), idx)
+    random_path_mask = create_mask_at_random_path_index(sampled_random_path.view(-1, w, h), idx, batch_size, w, h)
 
     conditional_prob = predict_conditional_prob(realization, model, random_path_mask, idx)
 
@@ -129,37 +131,40 @@ def elbo_objective(model, realization, device='cuda'):
 
 def train(model, optimizer, lr_scheduler, train_dataloader,
           accelerator,
-          ema, epochs, max_grad_norm, path, fname,
+          ema, total_steps, max_grad_norm, path: Path, fname,
           save_every, device='cuda'):
 
+    progress_bar = tqdm(range(total_steps), total=total_steps)
     realizations = []
     global_step = 0
-    for epoch in range(epochs):
+    for batch_idx, realization in enumerate(train_dataloader):
 
-        if epochs % save_every == 0:
+        if global_step % save_every == 0:
             torch.save(accelerator.unwrap_model(ema.averaged_model).state_dict(),
-                       path + "/" + fname + "_step_{0:}.pth".format(global_step))
+                       path.joinpath(fname + "_step_{0:}.pth".format(global_step)))
 
-        progress_bar = tqdm(enumerate(train_dataloader), total=len(train_dataloader))
-        for i, (realization, _) in progress_bar:
-            realization = one_hot_realization(realization.float())
+        realization = one_hot_realization(realization.float())
 
-            optimizer.zero_grad()
+        optimizer.zero_grad()
 
-            loss = elbo_objective(model, realization, device=device)
-            accelerator.backward(loss)
-            accelerator.clip_grad_norm_(model.parameters(), max_grad_norm)
+        loss = elbo_objective(model, realization, device=device)
+        accelerator.backward(loss)
+        accelerator.clip_grad_norm_(model.parameters(), max_grad_norm)
 
-            global_step += 1
+        global_step += 1
 
-            lr_scheduler.step()
-            optimizer.step()
-            ema.step(model)
+        lr_scheduler.step()
+        optimizer.step()
+        ema.step(model)
 
-            logs = {"loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], "step": global_step}
-            accelerator.log(logs, step=global_step)
+        logs = {"loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], "step": global_step}
+        accelerator.log(logs, step=global_step)
 
-            progress_bar.set_description(
-                "Step {0:}, Loss: {1:.2f}, Learning Rate: {2:.3e}".format(logs['step'], logs['loss'], logs['lr']))
+        progress_bar.set_description(
+            "Step {0:}, Loss: {1:.2f}, Learning Rate: {2:.3e}".format(logs['step'], logs['loss'], logs['lr']))
+        progress_bar.update(1)
+
+        if global_step == total_steps:
+            break
 
     return realizations

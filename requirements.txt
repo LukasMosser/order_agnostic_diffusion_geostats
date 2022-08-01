@@ -7,7 +7,7 @@ torchvision
 huggingface_hub
 accelerate
 diffusers
-flake8
-pylint
-black
-docutils
+gradio
+pydantic
+python-dotenv
+wandb
