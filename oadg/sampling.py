@@ -5,6 +5,24 @@ from oadg.training import create_mask_at_random_path_index, create_sampling_loca
 from oadg.training import insert_predicted_value_at_sampling_location, sample_from_conditional
 
 
+def initalize_empty_realizations_and_paths(batch_size, w, h, device='cpu'):
+    sigmas = []
+    for _ in range(batch_size):
+        sigma_range = np.arange(w * h)
+        np.random.shuffle(sigma_range)
+
+        sigma_conditioned = sigma_range
+        sigmas.append(sigma_conditioned)
+
+    sigmas = np.array(sigmas)
+
+    t_range_start = 0
+    sigma_conditioned = torch.from_numpy(sigmas).to(device)
+
+    realization = torch.zeros((batch_size, 1, h, w)).to(device)
+    return t_range_start, sigma_conditioned, realization
+
+
 def make_conditional_paths_and_realization(conditioning_data, batch_size=16, device='cpu'):
     w, h = conditioning_data.shape
 

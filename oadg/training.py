@@ -49,37 +49,6 @@ def binary_entropy(p, eps=1e-6):
     return h
 
 
-def sample(model,
-           w=64, h=64,
-           batch_size=36,
-           idx_range_start=0,
-           random_path=None,
-           realization=None,
-           device='cuda'):
-    if random_path is None and realization is None:
-        sampled_random_path = sample_random_path(batch_size, w, h, device=device)
-        realization = torch.zeros(batch_size, 2, w, h, requires_grad=False, device=device).float()
-
-    idx_range = torch.arange(start=idx_range_start, end=w * h, step=1, device=device, requires_grad=False)
-
-    progress_bar = tqdm(idx_range, total=len(idx_range))
-    for idx in progress_bar:
-        mask = create_mask_at_random_path_index(sampled_random_path, idx)
-
-        sampling_location_mask = create_sampling_location_mask(sampled_random_path, idx, w, h)
-        with torch.inference_mode():
-            conditional_prob = predict_conditional_prob(realization, model, mask, idx)
-
-        sampled_realization = sample_from_conditional(conditional_prob)
-        realization = insert_predicted_value_at_sampling_location(realization, sampled_realization,
-                                                                  sampling_location_mask)
-
-        progress_bar.set_description("Generating Sample. Step: {0:}".format(idx))
-
-    realization = torch.argmax(realization, dim=1, keepdim=True).cpu()
-    return realization
-
-
 def one_hot_realization(realization):
     realization = torch.cat([1 - realization, realization], dim=1)
     return realization
