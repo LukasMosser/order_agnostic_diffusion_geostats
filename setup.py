@@ -18,8 +18,7 @@ setup(
     author="Lukas Mosser",
     author_email="lukas.mosser@gmail.com",
     url="https://github.com/LukasMosser/oadg",
-    package_dir={"": "src"},
-    packages=find_packages(where="src"),
+    packages=['oadg'],
     python_requires=">=3.9.0",
     install_requires=required,
     classifiers=[

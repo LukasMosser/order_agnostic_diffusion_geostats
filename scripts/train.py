@@ -29,8 +29,6 @@ class TrainingConfig:
 
 
 def main():
-    """### Inititalizing the Model, Optimizer, and Scheduler"""
-
     config = TrainingConfig()
 
     utils.set_seed(config.seed)

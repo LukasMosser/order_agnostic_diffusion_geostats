@@ -45,7 +45,7 @@ class Channels(VisionDataset):
         if not self._check_exists():
             raise RuntimeError("Dataset not found. You can use download=True to download it")
 
-        self.data = self._extract_patches(patch_size, stride, flip_up, flip_left, mirror)
+        self.data = self._create_dataset(patch_size, stride, flip_up, flip_left, mirror)
 
     def _create_dataset(self, patch_size: int, stride: int, flip_up: bool, flip_left: bool, mirror: bool):
         root = os.path.expanduser(self.raw_folder)
@@ -86,7 +86,7 @@ class Channels(VisionDataset):
 
     def _check_exists(self) -> bool:
         return all(
-            check_integrity(os.path.join(self.raw_folder, os.path.splitext(os.path.basename(url))[0]))
+            check_integrity(os.path.join(self.raw_folder, os.path.basename(url)))
             for url, _ in self.resources
         )
 
