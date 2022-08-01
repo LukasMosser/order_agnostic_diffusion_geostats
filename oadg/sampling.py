@@ -55,4 +55,4 @@ def sample(model, image_size: int = 32, batch_size: int = 16,
         realization = insert_predicted_value_at_sampling_location(realization, sampled_realization,
                                                                   sampling_location_mask)
 
-    return torch.argmax(realization, dim=1).numpy()
+    return torch.argmax(realization, dim=1).cpu().numpy()
