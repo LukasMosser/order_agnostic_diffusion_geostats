@@ -4,8 +4,10 @@ matplotlib
 imageio
 torch
 torchvision
+huggingface_hub
 accelerate
 diffusers
 flake8
 pylint
 black
+docutils
