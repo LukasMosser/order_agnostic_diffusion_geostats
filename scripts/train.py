@@ -3,7 +3,7 @@ import os
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
-from torchvision.transforms import Compose, ToTensor
+from torchvision.transforms import Compose, ToTensor, Resize
 from diffusers.models import UNet2DModel
 from diffusers.optimization import get_cosine_schedule_with_warmup
 from diffusers.training_utils import EMAModel
@@ -23,11 +23,21 @@ def main(args):
     args.checkpoint_dir.mkdir(parents=True, exist_ok=True)
     utils.set_seed(args.seed)
 
-    transform = Compose([ToTensor(), lambda x: x > 0.5])
-    train_dataset = Channels(root=args.data_root, download=True, transform=transform)
-    train_dataloader = DataLoader(train_dataset, num_workers=args.workers,
-                                  batch_size=args.batch_size, shuffle=True,
-                                  pin_memory=True, drop_last=True)
+    if args.dataset == 'MNIST':
+        transform = Compose([ToTensor(), Resize(args.image_size), lambda x: x > 0.5])
+        train_dataset = Channels(root=args.data_root, download=True, transform=transform)
+        train_dataloader = DataLoader(train_dataset, num_workers=args.workers,
+                                      batch_size=args.batch_size, shuffle=True,
+                                      pin_memory=True, drop_last=True)
+
+    elif args.dataset == 'Channels':
+        transform = Compose([ToTensor(), lambda x: x > 0.5])
+        train_dataset = Channels(root=args.data_root, download=True, transform=transform)
+        train_dataloader = DataLoader(train_dataset, num_workers=args.workers,
+                                      batch_size=args.batch_size, shuffle=True,
+                                      pin_memory=True, drop_last=True)
+    else:
+        return NotImplementedError
 
     model = UNet2DModel(
         sample_size=args.image_size,
@@ -84,6 +94,9 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='OADG Configuration Parser')
     parser.add_argument('--data-root', default=".", type=Path,
+                        help='path to dataset')
+    parser.add_argument('--dataset', default="Channels", type=str,
+                        choices=['Channels', 'MNIST'],
                         help='path to dataset')
     parser.add_argument('--workers', default=0, type=int,
                         help='number of data loader workers')
