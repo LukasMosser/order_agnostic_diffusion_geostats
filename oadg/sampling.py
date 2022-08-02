@@ -6,17 +6,25 @@ from oadg.training import insert_predicted_value_at_sampling_location, sample_fr
 
 
 def initialize_empty_realizations_and_paths(batch_size, w, h, device='cpu'):
+    """
+    We create the necessary sampling paths, each random for each bach element.
+    """
     random_paths = []
     for _ in range(batch_size):
+
+        # Linear increasing index steps for sampling paths.
         random_path = np.arange(w * h)
+
+        # Shuffle the index array to create a sampling path throughout the realization
         np.random.shuffle(random_path)
+
         random_paths.append(random_path)
 
     random_paths = np.array(random_paths)
 
+    # We start from an empty realization so we start at index 0 for generating samples x1 \sim p(x_1)
     idx_start = 0
     random_paths = torch.from_numpy(random_paths).to(device)
-
     realization = torch.zeros((batch_size, 1, h, w)).to(device)
     return idx_start, random_paths, realization
 
@@ -24,15 +32,27 @@ def initialize_empty_realizations_and_paths(batch_size, w, h, device='cpu'):
 def make_conditional_paths_and_realization(conditioning_data, batch_size=16, device='cpu'):
     w, h = conditioning_data.shape
 
-    flattened_img = (conditioning_data.flatten() / 255.).astype(int)
-    conditioning_indices = np.argwhere(flattened_img > 0)[:, 0]
+    # We turn the conditioning data into a vector
+    flattened_img = conditioning_data.flatten()
 
+    # And we find those locations where we have conditioning data (only foreground supported right now)
+    conditioning_indices = np.argwhere(flattened_img > 0)[:, 0]
+    unconditioned_indices = np.argwhere(flattened_img < 1)[:, 0]
+
+
+    # Generate random paths for each batch element
     random_paths = []
     for _ in range(batch_size):
-        random_path = np.arange(w * h)
+        # We need to take into account that we're gonna
+        random_path = np.arange(len(conditioning_indices), w * h)
         np.random.shuffle(random_path)
-        random_path[conditioning_indices] = np.arange(len(conditioning_indices))
-        random_paths.append(random_path)
+
+        random_path_grid = np.zeros((w, h)).reshape(-1)
+
+        # Where we have the conditioning data we set the indices to a range of n_0 to n_conditioning data
+        random_path_grid[conditioning_indices] = np.arange(len(conditioning_indices))
+        random_path_grid[unconditioned_indices] = random_path
+        random_paths.append(random_path_grid)
 
     random_paths = np.array(random_paths)
 
@@ -44,7 +64,7 @@ def make_conditional_paths_and_realization(conditioning_data, batch_size=16, dev
 
 
 def sample(model, image_size: int = 32, batch_size: int = 16,
-           realization=None, idx_start=None, random_paths=None, device='cpu'):
+           realization=None, idx_start=0, random_paths=None, device='cpu'):
     model.eval()
 
     w, h = image_size, image_size

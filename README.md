@@ -38,7 +38,8 @@ also interest the reader, and spurns further research at the intersection betwee
 ## Disclaimer and a note on publishing
 
 Right now this is a few notebooks, some code, and some models.
-I do not have funding necessary to publish in a proper journal, but may consider publishing through [Curvenote](https://curvenote.com/).
+I do not have funding necessary to publish in a proper journal, but may consider publishing through [Curvenote](https://curvenote.com/).  
+
 Please if you find this useful or interesting do consider referencing the repository anyway.
 
 As such this article is not peer reviewed, but I am happy to receive comments and will acknowledge these.

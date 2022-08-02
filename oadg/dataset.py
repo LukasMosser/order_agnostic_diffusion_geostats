@@ -13,6 +13,9 @@ from torchvision.datasets.vision import VisionDataset
 
 
 class Channels(VisionDataset):
+    """
+    Channels training dataset for pytorch, modified from MNIST dataset
+    """
     mirrors = [
         "https://raw.githubusercontent.com/elaloy/gan_for_gradient_based_inv/master/training/ti/",
     ]
@@ -118,6 +121,9 @@ class Channels(VisionDataset):
 
     @staticmethod
     def _extract_patches(img, patch_size=64, stride=16, flip_up_down=False, flip_left_right=False, mirror=False):
+        """
+        Extract patches from single training image.
+        """
         patches = []
         for i in range(0, img.shape[0] - patch_size, stride):
             for j in range(0, img.shape[1] - patch_size, stride):
