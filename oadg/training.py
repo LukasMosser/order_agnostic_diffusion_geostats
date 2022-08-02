@@ -146,6 +146,7 @@ def train(model, optimizer, lr_scheduler, train_dataloader,
 
     # We use an enumeration of the dataloader to continuously sample from the dataloader without epochs
     for realization in itertools.cycle(train_dataloader):
+
         if isinstance(realization, list):
             # Handle datasets with labels, assumes image first, label second.
             realization = realization[0]

@@ -96,46 +96,46 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='OADG Configuration Parser')
     parser.add_argument('--data-root', default=".", type=Path,
-                        help='path to dataset')
+                        help='path to dataset root director')
     parser.add_argument('--dataset', default="Channels", type=str,
                         choices=['Channels', 'MNIST'],
-                        help='path to dataset')
+                        help='which dataset to train on')
     parser.add_argument('--workers', default=0, type=int,
                         help='number of data loader workers')
     parser.add_argument('--image-size', default=64, type=int,
-                        help='number of data loader workers')
+                        help='size of training images, for rescaling')
     parser.add_argument('--warmup-steps', default=500, type=int,
-                        help='number of data loader workers')
+                        help='number of learning rate warmup steps')
     parser.add_argument('--total-steps', default=1000, type=int,
-                        help='number of total epochs to run')
+                        help='total number of steps of minibatch gradient descent')
     parser.add_argument('--batch-size', default=64, type=int,
                         help='mini-batch size')
     parser.add_argument('--weight-decay', default=1e-6, type=float,
                         help='weight decay')
     parser.add_argument('--learning-rate', default=3e-4, type=float,
-                        help='weight decay')
+                        help='learning rate')
     parser.add_argument('--max-grad-norm', default=1e2, type=float,
-                        help='weight decay')
+                        help='maximum norm of the gradients')
     parser.add_argument('--ema-inv-gamma', default=1.0, type=float,
-                        help='weight decay')
+                        help='inverse gamma parameter for exponential moving average')
     parser.add_argument('--ema-power', default=0.75, type=float,
-                        help='weight decay')
+                        help='power parameter for exponential moving average')
     parser.add_argument('--ema-max-value', default=0.999, type=float,
-                        help='weight decay')
+                        help='max value parameter for exponential moving average')
     parser.add_argument('--precision', default='no', type=str, choices=['no', 'fp16', 'bf16'],
-                        help='weight decay')
+                        help='whether to use 16-bit or 32-bit training')
     parser.add_argument('--save-every', default=1000, type=int,
-                        help='weight decay')
+                        help='every how many steps to save a checkpoint')
     parser.add_argument('--seed', default=0, type=int,
-                        help='weight decay')
+                        help='random number seed')
     parser.add_argument('--checkpoint-dir', default='./checkpoint/', type=Path,
                         help='path to checkpoint directory')
     parser.add_argument('--checkpoint-prefix', default='channels',
-                        help='path to checkpoint directory')
+                        help='prefix for local checkpoint')
     parser.add_argument('--wandb-project-name', default='order-agnostic-autoregressive-diffusion-channels',
                         help='name of wandb project')
     parser.add_argument('--hf-hub-repository', default='oadg_channels_64',
-                        help='name of wandb project')
+                        help='name of huggingface model repository')
 
     args = parser.parse_args()
     main(args)

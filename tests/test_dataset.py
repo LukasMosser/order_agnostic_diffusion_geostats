@@ -31,4 +31,3 @@ def test_cycle_dataset():
         step += 1
 
     assert cycle > 1
-
