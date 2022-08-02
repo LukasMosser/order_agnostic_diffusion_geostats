@@ -1,3 +1,4 @@
+from itertools import cycle
 from pathlib import Path
 import numpy as np
 from tqdm.auto import tqdm
@@ -144,7 +145,7 @@ def train(model, optimizer, lr_scheduler, train_dataloader,
     global_step = 0
 
     # We use an enumeration of the dataloader to continuously sample from the dataloader without epochs
-    for batch_idx, realization in enumerate(train_dataloader):
+    for batch_idx, realization in cycle(enumerate(train_dataloader)):
         optimizer.zero_grad()
 
         if global_step % save_every == 0:
