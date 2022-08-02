@@ -16,7 +16,6 @@ def sample_random_path(batch_size, w, h, device='cuda'):
 
 def create_mask_at_random_path_index(sampled_random_path, idx, batch_size, w, h):
     # Create a mask that has 1s everywhere where we've sampled, and 0's everywhere else
-    print(sampled_random_path.size(), idx.size(), batch_size, w, h)
     mask = (sampled_random_path < idx).view(batch_size, 1, w, h).long()
     return mask
 
