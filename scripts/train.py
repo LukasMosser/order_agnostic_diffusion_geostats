@@ -3,6 +3,7 @@ import os
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
+from torchvision.datasets import MNIST
 from torchvision.transforms import Compose, ToTensor, Resize
 from diffusers.models import UNet2DModel
 from diffusers.optimization import get_cosine_schedule_with_warmup
@@ -26,7 +27,7 @@ def main(args):
 
     if args.dataset == 'MNIST':
         transform = Compose([ToTensor(), Resize(args.image_size), lambda x: x > 0.5])
-        train_dataset = Channels(root=args.data_root, download=True, transform=transform)
+        train_dataset = MNIST(root=args.data_root, download=True, transform=transform, train=True)
         train_dataloader = DataLoader(train_dataset, num_workers=args.workers,
                                       batch_size=args.batch_size, shuffle=True,
                                       pin_memory=True, drop_last=True)
