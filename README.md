@@ -53,6 +53,13 @@ Installation can be performed via pip:
 pip install git+https://github.com/LukasMosser/order_agnostic_diffusion_geostats@main
 ```
 
+## Demos
+The following demos are available and deployed on Huggingface Spaces:
+
+| Description                     | Demo Link                                                                                  |
+|---------------------------------|--------------------------------------------------------------------------------------------|
+| Conditional Channels Generation | [Huggingface Spaces Link](https://huggingface.co/spaces/porestar/oadg_channels_64_drawing) |
+| Conditional MNIST Generation    | [Huggingface Spaces Link](https://huggingface.co/spaces/porestar/oadg_mnist_32_drawing)    |
 
 ## Models
 | Model Description            | Huggingface Model Hub Link                                                                       | Weights & Biases Logging Run                                                                                                                                     |
