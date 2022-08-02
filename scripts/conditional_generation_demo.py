@@ -48,12 +48,12 @@ def sample_image(img):
     img = img.reshape(image_size, image_size) * 255
 
     entropy = evaluate_entropy(model, batch_size=batch_size, image_size=image_size,
-                 realization=realization, idx_start=idx_start, random_paths=random_paths, device=device)
+                               realization=realization, idx_start=idx_start, random_paths=random_paths, device=device)
     entropy = (entropy.reshape(image_size, image_size) * 255).astype(int)
 
     return entropy, img
 
-gr.Text()
+
 img = gr.Image(image_mode="L", source="canvas", shape=(image_size, image_size), invert_colors=True, label="Drawing Canvas")
 out_realization = gr.Image(image_mode="L", shape=(image_size, image_size), invert_colors=True, label="Sample Realization")
 out_entropy = gr.Image(image_mode="L", shape=(image_size, image_size), invert_colors=True, label="Entropy of Drawn Data")

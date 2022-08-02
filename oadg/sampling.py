@@ -111,7 +111,7 @@ def sample(model, image_size: int = 32, batch_size: int = 16,
 
 
 def evaluate_entropy(model, image_size: int = 32, batch_size: int = 16,
-           realization=None, idx_start=0, random_paths=None, device='cpu'):
+                     realization=None, idx_start=0, random_paths=None, device='cpu'):
     """
     helper function to compute the entropy given some conditioning data
     """
