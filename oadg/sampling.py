@@ -91,8 +91,11 @@ def sample(model, image_size: int = 32, batch_size: int = 16,
 
     # Iterate over incrementing steps, will predict based on random path
     for idx in tqdm(idx_range):
+
+        # Create a mask to indicate locations where we've already sampled
         mask = create_mask_at_random_path_index(random_paths, idx, batch_size, w, h)
 
+        # Create a mask to indicate where we are currently sampling
         sampling_location_mask = create_sampling_location_mask(random_paths, idx, w, h)
 
         # use inference mode to speed up prediction of univariate conditional distribution for current sampling location

@@ -1,8 +1,8 @@
 # Order-Agnostic Autoregressive Diffusion Models for Geostatistical Applications
 
+A live version of this is released on [Curvenote Curvespace](https://curve.space/curvespace) under [this link](https://l_moss-orderagnostic.curve.space/order_agnostic_diffusion_geostats).
 
 ## Introduction
-
 This is a short introduction to the reasoning behind this work.   
 The introductory notebook provides a full length description and implementation of the methods.  
 *Introductory Notebook* [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/introduction_and_walkthrough.ipynb)
@@ -62,6 +62,8 @@ The following demos are available and deployed on Huggingface Spaces:
 | Conditional MNIST Generation    | [Huggingface Spaces Link](https://huggingface.co/spaces/porestar/oadg_mnist_32_drawing)    |
 
 ## Models
+A few pre-trained models are available via huggingface model repositories  
+
 | Model Description            | Huggingface Model Hub Link                                                                       | Weights & Biases Logging Run                                                                                                                                     |
 |------------------------------|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Channels Dataset at 64x64 px | [Huggingface Model Hub Link](https://huggingface.co/porestar/oadg_mnist_32/tree/main)            | [Weights & Biases Monitoring](https://wandb.ai/lukas-mosser/order-agnostic-autoregressive-diffusion-channels/runs/2swdnaup/overview?workspace=user-lukas-mosser) |
@@ -69,12 +71,12 @@ The following demos are available and deployed on Huggingface Spaces:
 
 
 ## Notebooks
-| Description                                      | Google Colab Link                                                                                                                                                                                                            |
-|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Introduction and Walkthrough (Start Here)        | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/introduction_and_walkthrough.ipynb)  |
-| Train MNIST and Channel Models with Google Colab | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/train_oadg_models_colab_hf_wb.ipynb) |
-|                                                  |                                                                                                                                                                                                                              |
-|                                                  |                                                                                                                                                                                                                              |
+These notebooks are intended to be run on Google Colab.
+| Description                                                | Google Colab Link                                                                                                                                                                                                          |
+|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Introduction and Walkthrough (Start Here)                  | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/introduction_and_walkthrough.ipynb) |
+| Train MNIST and Channel Models with Google Colab           | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/train_oadg_models_colab_hf_wb.ipynb) |
+| Conditional Channel Image Generation on Google Colab | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/interactive_conditional_image_generation_demo_gradio.ipynb)|
 
 
 ## Acknowledgments
