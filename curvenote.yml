@@ -23,3 +23,8 @@ site:
   logoText: >-
     Order-Agnostic Autoregressive Diffusion Models for Geostatistical
     Applications
+  authors:
+    - name: Lukas Mosser
+      orcid: 0000-0003-2680-5002
+      corresponding: true
+      email: lukas.mosser@gmail.com
