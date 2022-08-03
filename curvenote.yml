@@ -1,0 +1,25 @@
+version: 1
+project:
+  title: >-
+    Order-Agnostic Autoregressive Diffusion Models for Geostatistical
+    Applications
+site:
+  title: >-
+    Order-Agnostic Autoregressive Diffusion Models for Geostatistical
+    Applications
+  projects:
+    - path: .
+      slug: order_agnostic_diffusion_geostats
+  nav:
+    - title: >-
+        Order-Agnostic Autoregressive Diffusion Models for Geostatistical
+        Applications
+      url: /order_agnostic_diffusion_geostats
+  actions:
+    - title: Learn More
+      url: https://curvenote.com/docs/web
+  domains: []
+  logo: public/logo.svg
+  logoText: >-
+    Order-Agnostic Autoregressive Diffusion Models for Geostatistical
+    Applications

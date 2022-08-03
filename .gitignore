@@ -1,3 +1,7 @@
+flagged/
+wandb/
+public/
+_build/
 Channels/
 
 # Byte-compiled / optimized / DLL files
