@@ -20,7 +20,7 @@ These features make SIS able to generate stochastic realizations honoring existi
 
 #### (Deep) Autoregressive Generative Models
 
-Autoregressive models (See [Kevin Patrick Murphy](Kevin Patrick Murphy)'s new book [Probabilistic Machine Learning: Advanced Topics](https://probml.github.io/pml-book/book2.html) chapter 22 for an introduction) using (deep) neural networks have shown a large potential to represent complex data distributions.
+Autoregressive models (See [Kevin Patrick Murphy](https://www.cs.ubc.ca/~murphyk/)'s new book [Probabilistic Machine Learning: Advanced Topics](https://probml.github.io/pml-book/book2.html) chapter 22 for an introduction) using (deep) neural networks have shown a large potential to represent complex data distributions.
 In many cases, so-called causal convolutions require data to be generated in very specific patterns (top down, left to right)
 which does not allow for sampling of realizations with conditioning data at various locations.
 
