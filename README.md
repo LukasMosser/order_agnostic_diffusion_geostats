@@ -74,6 +74,7 @@ A few pre-trained models are available via huggingface model repositories
 
 ## Notebooks
 These notebooks are intended to be run on Google Colab.
+
 | Description                                                | Google Colab Link                                                                                                                                                                                                          |
 |------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Introduction and Walkthrough (Start Here)                  | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/introduction_and_walkthrough.ipynb) |
