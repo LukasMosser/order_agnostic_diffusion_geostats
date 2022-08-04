@@ -79,6 +79,7 @@ These notebooks are intended to be run on Google Colab.
 | Introduction and Walkthrough (Start Here)                  | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/introduction_and_walkthrough.ipynb) |
 | Train MNIST and Channel Models with Google Colab           | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/train_oadg_models_colab_hf_wb.ipynb) |
 | Conditional Channel Image Generation on Google Colab | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/interactive_conditional_image_generation_demo_gradio.ipynb)|
+| Log Likelihood Evaluation Demo | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/LukasMosser/order_agnostic_diffusion_geostats/blob/main/notebooks/log_likelihood_evaluation_demo_gradio.ipynb)|
 
 
 ## Acknowledgments
