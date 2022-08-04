@@ -97,12 +97,16 @@ Please consider citing their work and providing proper attribution.
 ## Reference
 If you've found this useful please consider referencing this repository in your own work
 ```
-@software{order_agnostic_diffusion_geostats,
+@software{lukas_mosser_2022_6961205,
   author       = {Lukas Mosser},
-  title        = {{Order-Agnostic Autoregressive Diffusion Models for Geostatistical Applications}},
+  title        = {{LukasMosser/order\_agnostic\_diffusion\_geostats: 
+                   Initial Release}},
   month        = aug,
   year         = 2022,
-  url          = {https://github.com/LukasMosser/order_agnostic_diffusion_geostats}
+  publisher    = {Zenodo},
+  version      = {v0.0.2\_zenodo},
+  doi          = {10.5281/zenodo.6961205},
+  url          = {https://doi.org/10.5281/zenodo.6961205}
 }
 ```
 
