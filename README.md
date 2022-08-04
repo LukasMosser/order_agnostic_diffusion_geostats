@@ -1,5 +1,7 @@
 # Order-Agnostic Autoregressive Diffusion Models for Geostatistical Applications
 
+Reference: [![DOI](https://zenodo.org/badge/517723231.svg)](https://zenodo.org/badge/latestdoi/517723231)
+
 A live version of this is released on [Curvenote Curvespace](https://curve.space/curvespace) under [this link](https://l_moss-orderagnostic.curve.space/order_agnostic_diffusion_geostats).
 
 ## Introduction
