@@ -3,30 +3,25 @@ project:
   title: >-
     Order-Agnostic Autoregressive Diffusion Models for Geostatistical
     Applications
+  github: https://github.com/LukasMosser/order_agnostic_diffusion_geostats
+  open_access: true
+  license:
+    code: Apache-2.0
+    content: CC-BY-SA-4.0
+  authors:
+    - name: Lukas Mosser
+      orcid: 0000-0003-2680-5002
+      corresponding: true
+      email: lukas.mosser@gmail.com
 site:
-  title: >-
-    Order-Agnostic Autoregressive Diffusion Models for Geostatistical
-    Applications
+  title: OAADM for GeoStatistics
   projects:
     - path: .
       slug: order_agnostic_diffusion_geostats
-  nav:
-    - title: >-
-        Order-Agnostic Autoregressive Diffusion Models for Geostatistical
-        Applications
-      url: /order_agnostic_diffusion_geostats
   actions:
     - title: Learn More
       url: https://curvenote.com/docs/web
   domains:
     - l_moss-orderagnostic.curve.space
   logo: public/logo.svg
-  logoText: >-
-    Order-Agnostic Autoregressive Diffusion Models for Geostatistical
-    Applications
-  authors:
-    - name: Lukas Mosser
-      orcid: 0000-0003-2680-5002
-      corresponding: true
-      email: lukas.mosser@gmail.com
-
+  logoText: OAADM for GeoStatistics
